@@ -1,0 +1,2 @@
+# Supreme-Power
+Market Scanner
