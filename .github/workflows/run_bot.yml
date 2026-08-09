@@ -1,0 +1,35 @@
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 */4 * * *'
+
+concurrency:
+  group: trading-bot
+  cancel-in-progress: false
+
+jobs:
+  run-trading-script:
+    runs-on: ubuntu-latest
+    timeout-minutes: 235
+    
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+
+      - name: Set up Python environment
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python3 -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then python3 -m pip install -r requirements.txt; fi
+
+      - name: Execute Asynchronous Trading Script
+        env:
+          TRADIER_API_TOKEN: ${{ secrets.TRADIER_API_TOKEN }}
+          TRADIER_STREAM_URL: ${{ secrets.TRADIER_STREAM_URL }}
+        run: python3 Remnant.py
+           
