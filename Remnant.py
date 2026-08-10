@@ -227,8 +227,8 @@ async def main():
     consumer = PhantomStreamConsumer(
         engine=engine,
         api_token=TRADIER_API_TOKEN,
-        stream_url=TRADIER_STREAM_URL
-        outbound_queue=outbound_queue
+        stream_url=TRADIER_STREAM_URL,
+        outbound_queue=outbound_trade_queue
     )
 
     await asyncio.gather(
