@@ -215,7 +215,7 @@ async def anomaly_splitter_pipeline(outbound_queue: asyncio.Queue):
 # SYSTEM INITIALIZATION AND CONCURRENT TASK MANAGEMENT
 # =====================================================================
 async def main():
-    engine = PhantomSqueezeEngine()
+    engine = QuantitativeEngine()
     outbound_trade_queue = asyncio.Queue()
     
     # -------------------------------------------------------------
@@ -228,6 +228,7 @@ async def main():
         engine=engine,
         api_token=TRADIER_API_TOKEN,
         stream_url=TRADIER_STREAM_URL
+        outbound_queue=outbound_queue
     )
 
     await asyncio.gather(
