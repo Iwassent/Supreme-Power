@@ -227,3 +227,4 @@ async def main():
     consumer = PhantomStreamConsumer(
         engine=engine,
         api_token=TRADIER_API_TOKEN,
+    )
