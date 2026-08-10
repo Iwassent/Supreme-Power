@@ -228,3 +228,15 @@ async def main():
         engine=engine,
         api_token=TRADIER_API_TOKEN,
     )
+    stream_url=TRADIER_STREAM_URL
+)
+
+    await asyncio.gather(
+        consumer.run_stream_loop(),
+        consumer.process_evaluation_pipeline()
+)
+
+if __name__ == "__main__":
+    asyncio.run(main())
+    
+    
