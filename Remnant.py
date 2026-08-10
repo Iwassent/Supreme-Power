@@ -1,4 +1,4 @@
-import asyncio
+import asyncio, os
 import json
 import numpy as np
 import websockets
