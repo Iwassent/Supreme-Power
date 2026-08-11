@@ -235,7 +235,16 @@ async def main():
         consumer.run_stream_loop(),
         consumer.process_evaluation_pipeline()
     )
-
 if __name__ == "__main__":
-    asyncio.run(main())    
-    
+    # Force a clean, standard event loop policy configuration
+    try:
+        import nest_asyncio
+        nest_asyncio.apply()
+    except ImportError:
+        pass
+
+    asyncio.set_event_loop_policy(asyncio.DefaultEventLoopPolicy())
+    asyncio.run(main())
+
+
+   
