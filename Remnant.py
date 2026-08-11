@@ -214,15 +214,15 @@ async def anomaly_splitter_pipeline(outbound_queue: asyncio.Queue):
 # =====================================================================
 # SYSTEM INITIALIZATION AND CONCURRENT TASK MANAGEMENT
 # =====================================================================
+
 async def main():
+    loop = asyncio.get_running_loop()
+    
     engine = PhantomSqueezeEngine()
     outbound_trade_queue = asyncio.Queue()
     
-    # -------------------------------------------------------------
-    # CONFIGURATION INTERFACE: INPUT TRADIER API CREDENTIALS HERE
-    # -------------------------------------------------------------
     TRADIER_API_TOKEN = "YOUR_TRADIER_PROD_OR_SANDBOX_TOKEN"
-    TRADIER_STREAM_URL = "wss://://tradier.com" 
+    TRADIER_STREAM_URL = "wss://://tradier.com"
     
     consumer = PhantomStreamConsumer(
         engine=engine,
@@ -237,7 +237,5 @@ async def main():
     )
 
 if __name__ == "__main__":
-    asyncio.run(main())
-
-    
+    asyncio.run(main())    
     
